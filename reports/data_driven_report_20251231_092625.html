@@ -1,0 +1,648 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>点云格式转换数据驱动测试报告</title>
+            <style>
+                body { font-family: 'Microsoft YaHei', Arial, sans-serif; margin: 40px; }
+                .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px; }
+                .summary { margin: 30px 0; padding: 25px; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                .stats { display: flex; justify-content: space-around; margin: 20px 0; }
+                .stat-card { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+                .stat-pass { border-left: 5px solid #28a745; }
+                .stat-fail { border-left: 5px solid #dc3545; }
+                .stat-error { border-left: 5px solid #ffc107; }
+                .stat-total { border-left: 5px solid #007bff; }
+                .stat-time { border-left: 5px solid #17a2b8; }
+                table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                th, td { border: 1px solid #dee2e6; padding: 12px; text-align: left; }
+                th { background-color: #f2f2f2; font-weight: bold; }
+                .test-case-row:hover { background-color: #f8f9fa; }
+                .progress-bar { height: 20px; background: #e9ecef; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+                .progress-fill { height: 100%; background: #28a745; }
+                .toggle-details { cursor: pointer; color: #007bff; }
+                .test-details { display: none; padding: 15px; background: #f8f9fa; border-radius: 5px; margin: 10px 0; }
+                .config-cell { max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+                .config-cell:hover { overflow: visible; white-space: normal; background: white; z-index: 100; position: relative; }
+                .time-cell { font-family: monospace; }
+            </style>
+            <script>
+                function toggleDetails(caseId) {
+                    var details = document.getElementById('details-' + caseId);
+                    var button = document.getElementById('button-' + caseId);
+                    if (details.style.display === 'none') {
+                        details.style.display = 'block';
+                        button.textContent = '收起详情';
+                    } else {
+                        details.style.display = 'none';
+                        button.textContent = '查看详情';
+                    }
+                }
+            </script>
+        </head>
+        <body>
+            <div class="header">
+                <h1>📊 点云格式转换数据驱动测试报告</h1>
+                <p>生成时间: 2025-12-31 09:26:25</p>
+            </div>
+            
+            <div class="summary">
+                <h2>📈 测试摘要</h2>
+                <div class="stats">
+                    <div class="stat-card stat-total">
+                        <h3>总计</h3>
+                        <h2>8</h2>
+                    </div>
+                    <div class="stat-card stat-pass">
+                        <h3>通过</h3>
+                        <h2>0</h2>
+                    </div>
+                    <div class="stat-card stat-fail">
+                        <h3>失败</h3>
+                        <h2>8</h2>
+                    </div>
+                    <div class="stat-card stat-error">
+                        <h3>错误</h3>
+                        <h2>0</h2>
+                    </div>
+                    <div class="stat-card stat-time">
+                        <h3>平均转换时间</h3>
+                        <h2>0.0秒</h2>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>通过率</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0.0%"></div>
+                    </div>
+                    <p>0.00% (0/8)</p>
+                </div>
+                
+                <p><strong>总耗时:</strong> 143.47秒</p>
+                <p><strong>开始时间:</strong> 2025-12-31T09:24:02.481852</p>
+                <p><strong>结束时间:</strong> 2025-12-31T09:26:25.955478</p>
+            </div>
+            
+            <h2>📋 测试用例详情</h2>
+            <table>
+                <tr>
+                    <th>用例ID</th>
+                    <th>输出格式</th>
+                    <th>点云抽稀</th>
+                    <th>体素抽稀</th>
+                    <th>随机抽稀</th>
+                    <th>输出类型</th>
+                    <th>贴图选择</th>
+                    <th>点云降噪</th>
+                    <th>厚度优化</th>
+                    <th>状态</th>
+                    <th>转换耗时(秒)</th>
+                    <th>操作</th>
+                </tr>
+        
+                <tr class="test-case-row">
+                    <td>TC001</td>
+                    <td class="config-cell">e57</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">合并</td>
+                    <td class="config-cell" title="反射率">反射率</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                    <td class="time-cell">N/A</td>
+                    <td><button id="button-TC001" class="toggle-details" onclick="toggleDetails('TC001')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC001">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC001</li>
+                                <li><strong>输出格式:</strong> e57</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> </li>
+                                <li><strong>输出类型:</strong> 合并</li>
+                                <li><strong>贴图选择:</strong> 反射率</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 体素抽稀配置</li>
+                                <li><strong>输出文件夹:</strong> 格式-e57_抽稀-体素_输出-合并_贴图-反射_降噪-启用_厚度-启用_12310924</li>
+                                <li><strong>转换开始时间:</strong> None</li>
+                                <li><strong>转换结束时间:</strong> None</li>
+                                <li><strong>转换耗时:</strong> N/A秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0x1709ea</td>
+                                    <td>2025-12-31T09:24:02.500438</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: RE小房间-常规</td>
+                                    <td>2025-12-31T09:24:04.561303</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T09:24:07.679307</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T09:24:11.291037</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: e57</td>
+                                    <td>2025-12-31T09:24:16.341873</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T09:24:21.328236</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置体素抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用体素抽稀</td>
+                                    <td>2025-12-31T09:24:25.686569</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 合并</td>
+                                    <td>2025-12-31T09:24:29.086087</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T09:24:32.578383</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云降噪</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云降噪</td>
+                                    <td>2025-12-31T09:24:37.649349</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云厚度优化</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云厚度优化</td>
+                                    <td>2025-12-31T09:24:42.536583</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T09:24:45.889223</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                                    <td>{'control_type': 'TreeItem', 'title': '新加卷 (D:)', 'top_level_only': False, 'parent': <uia_element_info.UIAElementInfo - '浏览文件夹', #32770, 265668>, 'backend': 'uia'}</td>
+                                    <td>2025-12-31T09:24:54.843286</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC002</td>
+                    <td class="config-cell">e57</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="反射率">反射率</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                    <td class="time-cell">N/A</td>
+                    <td><button id="button-TC002" class="toggle-details" onclick="toggleDetails('TC002')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC002">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC002</li>
+                                <li><strong>输出格式:</strong> e57</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> </li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 反射率</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 随机抽稀配置</li>
+                                <li><strong>输出文件夹:</strong> None</li>
+                                <li><strong>转换开始时间:</strong> None</li>
+                                <li><strong>转换结束时间:</strong> None</li>
+                                <li><strong>转换耗时:</strong> N/A秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                                    <td>timed out</td>
+                                    <td>2025-12-31T09:25:07.865533</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC003</td>
+                    <td class="config-cell">e57</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站+合并</td>
+                    <td class="config-cell" title="反射率+彩图">反射率+彩图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">不启用</td>
+                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                    <td class="time-cell">N/A</td>
+                    <td><button id="button-TC003" class="toggle-details" onclick="toggleDetails('TC003')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC003">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC003</li>
+                                <li><strong>输出格式:</strong> e57</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站+合并</li>
+                                <li><strong>贴图选择:</strong> 反射率+彩图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 不启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 双抽稀配置</li>
+                                <li><strong>输出文件夹:</strong> None</li>
+                                <li><strong>转换开始时间:</strong> None</li>
+                                <li><strong>转换结束时间:</strong> None</li>
+                                <li><strong>转换耗时:</strong> N/A秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                                    <td>timed out</td>
+                                    <td>2025-12-31T09:25:20.880718</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC004</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">不启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">合并</td>
+                    <td class="config-cell" title="灰阶图">灰阶图</td>
+                    <td class="config-cell">不启用</td>
+                    <td class="config-cell">不启用</td>
+                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                    <td class="time-cell">N/A</td>
+                    <td><button id="button-TC004" class="toggle-details" onclick="toggleDetails('TC004')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC004">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC004</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 不启用</li>
+                                <li><strong>体素抽稀:</strong> </li>
+                                <li><strong>随机抽稀:</strong> </li>
+                                <li><strong>输出类型:</strong> 合并</li>
+                                <li><strong>贴图选择:</strong> 灰阶图</li>
+                                <li><strong>点云降噪:</strong> 不启用</li>
+                                <li><strong>点云厚度优化:</strong> 不启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 简单配置</li>
+                                <li><strong>输出文件夹:</strong> None</li>
+                                <li><strong>转换开始时间:</strong> None</li>
+                                <li><strong>转换结束时间:</strong> None</li>
+                                <li><strong>转换耗时:</strong> N/A秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                                    <td>timed out</td>
+                                    <td>2025-12-31T09:25:33.891107</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC005</td>
+                    <td class="config-cell">las</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">单站+合并</td>
+                    <td class="config-cell" title="反射率+灰阶图">反射率+灰阶图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                    <td class="time-cell">N/A</td>
+                    <td><button id="button-TC005" class="toggle-details" onclick="toggleDetails('TC005')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC005">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC005</li>
+                                <li><strong>输出格式:</strong> las</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> </li>
+                                <li><strong>输出类型:</strong> 单站+合并</li>
+                                <li><strong>贴图选择:</strong> 反射率+灰阶图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> LAS高质量配置</li>
+                                <li><strong>输出文件夹:</strong> None</li>
+                                <li><strong>转换开始时间:</strong> None</li>
+                                <li><strong>转换结束时间:</strong> None</li>
+                                <li><strong>转换耗时:</strong> N/A秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                                    <td>timed out</td>
+                                    <td>2025-12-31T09:25:46.909118</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC006</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="灰阶图">灰阶图</td>
+                    <td class="config-cell">不启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                    <td class="time-cell">N/A</td>
+                    <td><button id="button-TC006" class="toggle-details" onclick="toggleDetails('TC006')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC006">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC006</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> </li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 灰阶图</li>
+                                <li><strong>点云降噪:</strong> 不启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> PTS随机抽稀配置</li>
+                                <li><strong>输出文件夹:</strong> None</li>
+                                <li><strong>转换开始时间:</strong> None</li>
+                                <li><strong>转换结束时间:</strong> None</li>
+                                <li><strong>转换耗时:</strong> N/A秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                                    <td>timed out</td>
+                                    <td>2025-12-31T09:25:59.918353</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC007</td>
+                    <td class="config-cell">e57</td>
+                    <td class="config-cell">不启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">合并</td>
+                    <td class="config-cell" title="反射率">反射率</td>
+                    <td class="config-cell">不启用</td>
+                    <td class="config-cell">不启用</td>
+                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                    <td class="time-cell">N/A</td>
+                    <td><button id="button-TC007" class="toggle-details" onclick="toggleDetails('TC007')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC007">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC007</li>
+                                <li><strong>输出格式:</strong> e57</li>
+                                <li><strong>点云抽稀:</strong> 不启用</li>
+                                <li><strong>体素抽稀:</strong> </li>
+                                <li><strong>随机抽稀:</strong> </li>
+                                <li><strong>输出类型:</strong> 合并</li>
+                                <li><strong>贴图选择:</strong> 反射率</li>
+                                <li><strong>点云降噪:</strong> 不启用</li>
+                                <li><strong>点云厚度优化:</strong> 不启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 最小配置</li>
+                                <li><strong>输出文件夹:</strong> None</li>
+                                <li><strong>转换开始时间:</strong> None</li>
+                                <li><strong>转换结束时间:</strong> None</li>
+                                <li><strong>转换耗时:</strong> N/A秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                                    <td>timed out</td>
+                                    <td>2025-12-31T09:26:12.940087</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC008</td>
+                    <td class="config-cell">e57</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站+合并</td>
+                    <td class="config-cell" title="反射率+彩图">反射率+彩图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                    <td class="time-cell">N/A</td>
+                    <td><button id="button-TC008" class="toggle-details" onclick="toggleDetails('TC008')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC008">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC008</li>
+                                <li><strong>输出格式:</strong> e57</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站+合并</li>
+                                <li><strong>贴图选择:</strong> 反射率+彩图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 最大配置</li>
+                                <li><strong>输出文件夹:</strong> None</li>
+                                <li><strong>转换开始时间:</strong> None</li>
+                                <li><strong>转换结束时间:</strong> None</li>
+                                <li><strong>转换耗时:</strong> N/A秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #dc3545; font-weight: bold;">失败</td>
+                                    <td>timed out</td>
+                                    <td>2025-12-31T09:26:25.954905</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+            </table>
+        </body>
+        </html>
+        

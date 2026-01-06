@@ -1,0 +1,1271 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>点云格式转换数据驱动测试报告</title>
+            <style>
+                body { font-family: 'Microsoft YaHei', Arial, sans-serif; margin: 40px; }
+                .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px; }
+                .summary { margin: 30px 0; padding: 25px; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                .stats { display: flex; justify-content: space-around; margin: 20px 0; }
+                .stat-card { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+                .stat-pass { border-left: 5px solid #28a745; }
+                .stat-fail { border-left: 5px solid #dc3545; }
+                .stat-error { border-left: 5px solid #ffc107; }
+                .stat-total { border-left: 5px solid #007bff; }
+                .stat-time { border-left: 5px solid #17a2b8; }
+                table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                th, td { border: 1px solid #dee2e6; padding: 12px; text-align: left; }
+                th { background-color: #f2f2f2; font-weight: bold; }
+                .test-case-row:hover { background-color: #f8f9fa; }
+                .progress-bar { height: 20px; background: #e9ecef; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+                .progress-fill { height: 100%; background: #28a745; }
+                .toggle-details { cursor: pointer; color: #007bff; }
+                .test-details { display: none; padding: 15px; background: #f8f9fa; border-radius: 5px; margin: 10px 0; }
+                .config-cell { max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+                .config-cell:hover { overflow: visible; white-space: normal; background: white; z-index: 100; position: relative; }
+                .time-cell { font-family: monospace; }
+            </style>
+            <script>
+                function toggleDetails(caseId) {
+                    var details = document.getElementById('details-' + caseId);
+                    var button = document.getElementById('button-' + caseId);
+                    if (details.style.display === 'none') {
+                        details.style.display = 'block';
+                        button.textContent = '收起详情';
+                    } else {
+                        details.style.display = 'none';
+                        button.textContent = '查看详情';
+                    }
+                }
+            </script>
+        </head>
+        <body>
+            <div class="header">
+                <h1>📊 点云格式转换数据驱动测试报告</h1>
+                <p>生成时间: 2025-12-31 13:34:49</p>
+            </div>
+            
+            <div class="summary">
+                <h2>📈 测试摘要</h2>
+                <div class="stats">
+                    <div class="stat-card stat-total">
+                        <h3>总计</h3>
+                        <h2>8</h2>
+                    </div>
+                    <div class="stat-card stat-pass">
+                        <h3>通过</h3>
+                        <h2>8</h2>
+                    </div>
+                    <div class="stat-card stat-fail">
+                        <h3>失败</h3>
+                        <h2>0</h2>
+                    </div>
+                    <div class="stat-card stat-error">
+                        <h3>错误</h3>
+                        <h2>0</h2>
+                    </div>
+                    <div class="stat-card stat-time">
+                        <h3>平均转换时间</h3>
+                        <h2>15.7秒</h2>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>通过率</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100.0%"></div>
+                    </div>
+                    <p>100.00% (8/8)</p>
+                </div>
+                
+                <p><strong>总耗时:</strong> 631.46秒</p>
+                <p><strong>开始时间:</strong> 2025-12-31T13:24:18.160351</p>
+                <p><strong>结束时间:</strong> 2025-12-31T13:34:49.615874</p>
+            </div>
+            
+            <h2>📋 测试用例详情</h2>
+            <table>
+                <tr>
+                    <th>用例ID</th>
+                    <th>输出格式</th>
+                    <th>点云抽稀</th>
+                    <th>体素抽稀</th>
+                    <th>随机抽稀</th>
+                    <th>输出类型</th>
+                    <th>贴图选择</th>
+                    <th>点云降噪</th>
+                    <th>厚度优化</th>
+                    <th>状态</th>
+                    <th>转换耗时(秒)</th>
+                    <th>操作</th>
+                </tr>
+        
+                <tr class="test-case-row">
+                    <td>TC0001</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="彩图">彩图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                    <td class="time-cell">9.9</td>
+                    <td><button id="button-TC0001" class="toggle-details" onclick="toggleDetails('TC0001')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC0001">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC0001</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> </li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 彩图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 组合1</li>
+                                <li><strong>输出文件夹:</strong> 格式-pts_抽稀-体素_输出-单站_贴图-反射_降噪-启用_厚度-启用_12311325</li>
+                                <li><strong>转换开始时间:</strong> 2025-12-31T13:25:18.349998</li>
+                                <li><strong>转换结束时间:</strong> 2025-12-31T13:25:28.268395</li>
+                                <li><strong>转换耗时:</strong> 9.9秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0xa0788</td>
+                                    <td>2025-12-31T13:24:18.184228</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: 建模_20251231025100</td>
+                                    <td>2025-12-31T13:24:19.897490</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:24:22.986003</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:24:26.794376</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: pts</td>
+                                    <td>2025-12-31T13:24:32.069825</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T13:24:37.424581</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置体素抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用体素抽稀</td>
+                                    <td>2025-12-31T13:24:42.023209</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 单站</td>
+                                    <td>2025-12-31T13:24:45.622900</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T13:24:49.309751</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云降噪</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云降噪</td>
+                                    <td>2025-12-31T13:24:54.574690</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云厚度优化</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云厚度优化</td>
+                                    <td>2025-12-31T13:24:59.830912</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:25:03.479681</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>文件夹: 格式-pts_抽稀-体素_输出-单站_贴图-反射_降噪-启用_厚度-启用_12311325</td>
+                                    <td>2025-12-31T13:25:18.350362</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>监控转换过程</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>转换耗时: 9.92秒</td>
+                                    <td>2025-12-31T13:25:31.962277</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC0002</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="彩图">彩图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                    <td class="time-cell">20.5</td>
+                    <td><button id="button-TC0002" class="toggle-details" onclick="toggleDetails('TC0002')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC0002">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC0002</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> </li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 彩图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 组合2</li>
+                                <li><strong>输出文件夹:</strong> 格式-pts_抽稀-随机_输出-单站_贴图-反射_降噪-启用_厚度-启用_12311326</li>
+                                <li><strong>转换开始时间:</strong> 2025-12-31T13:26:33.359657</li>
+                                <li><strong>转换结束时间:</strong> 2025-12-31T13:26:53.839141</li>
+                                <li><strong>转换耗时:</strong> 20.5秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0xa0788</td>
+                                    <td>2025-12-31T13:25:34.983703</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: 建模_20251231025100</td>
+                                    <td>2025-12-31T13:25:36.713896</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:25:39.802668</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:25:43.406222</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: pts</td>
+                                    <td>2025-12-31T13:25:48.386400</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T13:25:53.565142</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置随机抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用随机抽稀</td>
+                                    <td>2025-12-31T13:25:57.960563</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 单站</td>
+                                    <td>2025-12-31T13:26:01.526603</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T13:26:05.143089</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云降噪</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云降噪</td>
+                                    <td>2025-12-31T13:26:10.307284</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云厚度优化</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云厚度优化</td>
+                                    <td>2025-12-31T13:26:15.385607</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:26:18.968056</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>文件夹: 格式-pts_抽稀-随机_输出-单站_贴图-反射_降噪-启用_厚度-启用_12311326</td>
+                                    <td>2025-12-31T13:26:33.359940</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>监控转换过程</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>转换耗时: 20.48秒</td>
+                                    <td>2025-12-31T13:26:57.289033</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC0003</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="彩图">彩图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                    <td class="time-cell">21.6</td>
+                    <td><button id="button-TC0003" class="toggle-details" onclick="toggleDetails('TC0003')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC0003">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC0003</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 彩图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 组合3</li>
+                                <li><strong>输出文件夹:</strong> 格式-pts_抽稀-体素+随机_输出-单站_贴图-反射_降噪-启用_厚度-启用_12311327</li>
+                                <li><strong>转换开始时间:</strong> 2025-12-31T13:28:05.370519</li>
+                                <li><strong>转换结束时间:</strong> 2025-12-31T13:28:26.926476</li>
+                                <li><strong>转换耗时:</strong> 21.6秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0xa0788</td>
+                                    <td>2025-12-31T13:27:00.311071</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: 建模_20251231025100</td>
+                                    <td>2025-12-31T13:27:02.088202</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:27:05.058740</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:27:08.732938</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: pts</td>
+                                    <td>2025-12-31T13:27:13.740158</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T13:27:18.985538</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置体素抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用体素抽稀</td>
+                                    <td>2025-12-31T13:27:23.577308</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置随机抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用随机抽稀</td>
+                                    <td>2025-12-31T13:27:27.321381</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 单站</td>
+                                    <td>2025-12-31T13:27:31.123158</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T13:27:34.896320</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云降噪</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云降噪</td>
+                                    <td>2025-12-31T13:27:40.879325</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云厚度优化</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云厚度优化</td>
+                                    <td>2025-12-31T13:27:46.574666</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:27:50.343035</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>文件夹: 格式-pts_抽稀-体素+随机_输出-单站_贴图-反射_降噪-启用_厚度-启用_12311327</td>
+                                    <td>2025-12-31T13:28:05.370840</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>监控转换过程</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>转换耗时: 21.56秒</td>
+                                    <td>2025-12-31T13:28:30.475818</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC0004</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="彩图">彩图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">不启用</td>
+                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                    <td class="time-cell">9.6</td>
+                    <td><button id="button-TC0004" class="toggle-details" onclick="toggleDetails('TC0004')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC0004">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC0004</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> </li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 彩图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 不启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 组合4</li>
+                                <li><strong>输出文件夹:</strong> 格式-pts_抽稀-体素_输出-单站_贴图-反射_降噪-启用_厚度-不启用_12311329</li>
+                                <li><strong>转换开始时间:</strong> 2025-12-31T13:29:26.849454</li>
+                                <li><strong>转换结束时间:</strong> 2025-12-31T13:29:36.456053</li>
+                                <li><strong>转换耗时:</strong> 9.6秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0xa0788</td>
+                                    <td>2025-12-31T13:28:33.500433</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: 建模_20251231025100</td>
+                                    <td>2025-12-31T13:28:35.184145</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:28:38.128135</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:28:41.864982</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: pts</td>
+                                    <td>2025-12-31T13:28:47.100502</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T13:28:52.353988</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置体素抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用体素抽稀</td>
+                                    <td>2025-12-31T13:28:56.742720</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 单站</td>
+                                    <td>2025-12-31T13:29:00.241933</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T13:29:03.730321</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云降噪</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云降噪</td>
+                                    <td>2025-12-31T13:29:08.809574</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:29:12.324046</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>文件夹: 格式-pts_抽稀-体素_输出-单站_贴图-反射_降噪-启用_厚度-不启用_12311329</td>
+                                    <td>2025-12-31T13:29:26.849758</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>监控转换过程</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>转换耗时: 9.61秒</td>
+                                    <td>2025-12-31T13:29:39.962866</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC0005</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="彩图">彩图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">不启用</td>
+                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                    <td class="time-cell">17.2</td>
+                    <td><button id="button-TC0005" class="toggle-details" onclick="toggleDetails('TC0005')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC0005">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC0005</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> </li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 彩图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 不启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 组合5</li>
+                                <li><strong>输出文件夹:</strong> 格式-pts_抽稀-随机_输出-单站_贴图-反射_降噪-启用_厚度-不启用_12311330</li>
+                                <li><strong>转换开始时间:</strong> 2025-12-31T13:30:36.078342</li>
+                                <li><strong>转换结束时间:</strong> 2025-12-31T13:30:53.232833</li>
+                                <li><strong>转换耗时:</strong> 17.2秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0xa0788</td>
+                                    <td>2025-12-31T13:29:42.982586</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: 建模_20251231025100</td>
+                                    <td>2025-12-31T13:29:44.688465</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:29:47.703004</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:29:51.314447</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: pts</td>
+                                    <td>2025-12-31T13:29:56.246549</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T13:30:01.408695</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置随机抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用随机抽稀</td>
+                                    <td>2025-12-31T13:30:05.909140</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 单站</td>
+                                    <td>2025-12-31T13:30:09.487712</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T13:30:13.054518</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云降噪</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云降噪</td>
+                                    <td>2025-12-31T13:30:18.308137</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:30:21.762687</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>文件夹: 格式-pts_抽稀-随机_输出-单站_贴图-反射_降噪-启用_厚度-不启用_12311330</td>
+                                    <td>2025-12-31T13:30:36.078722</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>监控转换过程</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>转换耗时: 17.15秒</td>
+                                    <td>2025-12-31T13:30:56.674943</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC0006</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="彩图">彩图</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">不启用</td>
+                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                    <td class="time-cell">16.2</td>
+                    <td><button id="button-TC0006" class="toggle-details" onclick="toggleDetails('TC0006')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC0006">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC0006</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 彩图</li>
+                                <li><strong>点云降噪:</strong> 启用</li>
+                                <li><strong>点云厚度优化:</strong> 不启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 组合6</li>
+                                <li><strong>输出文件夹:</strong> 格式-pts_抽稀-体素+随机_输出-单站_贴图-反射_降噪-启用_厚度-不启用_12311331</li>
+                                <li><strong>转换开始时间:</strong> 2025-12-31T13:31:55.898530</li>
+                                <li><strong>转换结束时间:</strong> 2025-12-31T13:32:12.145907</li>
+                                <li><strong>转换耗时:</strong> 16.2秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0xa0788</td>
+                                    <td>2025-12-31T13:30:59.690864</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: 建模_20251231025100</td>
+                                    <td>2025-12-31T13:31:01.325539</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:31:04.197548</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:31:07.768532</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: pts</td>
+                                    <td>2025-12-31T13:31:12.755745</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T13:31:17.909617</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置体素抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用体素抽稀</td>
+                                    <td>2025-12-31T13:31:22.462727</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置随机抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用随机抽稀</td>
+                                    <td>2025-12-31T13:31:25.996697</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 单站</td>
+                                    <td>2025-12-31T13:31:29.491809</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T13:31:32.957836</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云降噪</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云降噪</td>
+                                    <td>2025-12-31T13:31:38.035771</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:31:41.354271</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>文件夹: 格式-pts_抽稀-体素+随机_输出-单站_贴图-反射_降噪-启用_厚度-不启用_12311331</td>
+                                    <td>2025-12-31T13:31:55.899198</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>监控转换过程</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>转换耗时: 16.25秒</td>
+                                    <td>2025-12-31T13:32:15.727924</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC0007</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="彩图">彩图</td>
+                    <td class="config-cell">不启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                    <td class="time-cell">9.9</td>
+                    <td><button id="button-TC0007" class="toggle-details" onclick="toggleDetails('TC0007')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC0007">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC0007</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> 启用</li>
+                                <li><strong>随机抽稀:</strong> </li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 彩图</li>
+                                <li><strong>点云降噪:</strong> 不启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 组合7</li>
+                                <li><strong>输出文件夹:</strong> 格式-pts_抽稀-体素_输出-单站_贴图-反射_降噪-不启用_厚度-启用_12311332</li>
+                                <li><strong>转换开始时间:</strong> 2025-12-31T13:33:13.539772</li>
+                                <li><strong>转换结束时间:</strong> 2025-12-31T13:33:23.426349</li>
+                                <li><strong>转换耗时:</strong> 9.9秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0xa0788</td>
+                                    <td>2025-12-31T13:32:18.744005</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: 建模_20251231025100</td>
+                                    <td>2025-12-31T13:32:20.395187</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:32:23.394011</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:32:27.093162</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: pts</td>
+                                    <td>2025-12-31T13:32:32.273701</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T13:32:37.571095</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置体素抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用体素抽稀</td>
+                                    <td>2025-12-31T13:32:42.341742</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 单站</td>
+                                    <td>2025-12-31T13:32:46.146588</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T13:32:49.839149</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云厚度优化</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云厚度优化</td>
+                                    <td>2025-12-31T13:32:55.187257</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:32:58.791125</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>文件夹: 格式-pts_抽稀-体素_输出-单站_贴图-反射_降噪-不启用_厚度-启用_12311332</td>
+                                    <td>2025-12-31T13:33:13.540102</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>监控转换过程</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>转换耗时: 9.89秒</td>
+                                    <td>2025-12-31T13:33:27.017231</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+                <tr class="test-case-row">
+                    <td>TC0008</td>
+                    <td class="config-cell">pts</td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell"></td>
+                    <td class="config-cell">启用</td>
+                    <td class="config-cell">单站</td>
+                    <td class="config-cell" title="彩图">彩图</td>
+                    <td class="config-cell">不启用</td>
+                    <td class="config-cell">启用</td>
+                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                    <td class="time-cell">20.7</td>
+                    <td><button id="button-TC0008" class="toggle-details" onclick="toggleDetails('TC0008')">查看详情</button></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div class="test-details" id="details-TC0008">
+                            <h4>测试配置详情:</h4>
+                            <ul>
+                                <li><strong>用例ID:</strong> TC0008</li>
+                                <li><strong>输出格式:</strong> pts</li>
+                                <li><strong>点云抽稀:</strong> 启用</li>
+                                <li><strong>体素抽稀:</strong> </li>
+                                <li><strong>随机抽稀:</strong> 启用</li>
+                                <li><strong>输出类型:</strong> 单站</li>
+                                <li><strong>贴图选择:</strong> 彩图</li>
+                                <li><strong>点云降噪:</strong> 不启用</li>
+                                <li><strong>点云厚度优化:</strong> 启用</li>
+                                <li><strong>预期结果:</strong> 成功</li>
+                                <li><strong>备注:</strong> 组合8</li>
+                                <li><strong>输出文件夹:</strong> 格式-pts_抽稀-随机_输出-单站_贴图-反射_降噪-不启用_厚度-启用_12311334</li>
+                                <li><strong>转换开始时间:</strong> 2025-12-31T13:34:25.439953</li>
+                                <li><strong>转换结束时间:</strong> 2025-12-31T13:34:46.090643</li>
+                                <li><strong>转换耗时:</strong> 20.7秒</li>
+                            </ul>
+                            
+                            <h4>测试步骤:</h4>
+                            <table>
+                                <tr>
+                                    <th>步骤</th>
+                                    <th>状态</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+            
+                                <tr>
+                                    <td>连接VORTEX</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>句柄: 0xa0788</td>
+                                    <td>2025-12-31T13:33:30.034642</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>定位目标窗口</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>窗口标题: 建模_20251231025100</td>
+                                    <td>2025-12-31T13:33:31.822433</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>点击导出按钮</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:33:34.859993</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择点云选项</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:33:38.480768</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出格式</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: pts</td>
+                                    <td>2025-12-31T13:33:44.012893</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 启用</td>
+                                    <td>2025-12-31T13:33:49.503090</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置随机抽稀</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>启用随机抽稀</td>
+                                    <td>2025-12-31T13:33:54.113410</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出类型</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 单站</td>
+                                    <td>2025-12-31T13:33:57.839675</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择贴图选择</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>选择: 反射率</td>
+                                    <td>2025-12-31T13:34:01.808053</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置点云厚度优化</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>状态: 点云厚度优化</td>
+                                    <td>2025-12-31T13:34:07.188579</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>配置导出设置</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td></td>
+                                    <td>2025-12-31T13:34:10.723881</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>选择输出路径</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>文件夹: 格式-pts_抽稀-随机_输出-单站_贴图-反射_降噪-不启用_厚度-启用_12311334</td>
+                                    <td>2025-12-31T13:34:25.440311</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>监控转换过程</td>
+                                    <td style="color: #28a745; font-weight: bold;">通过</td>
+                                    <td>转换耗时: 20.65秒</td>
+                                    <td>2025-12-31T13:34:49.615715</td>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            
+            </table>
+        </body>
+        </html>
+        
